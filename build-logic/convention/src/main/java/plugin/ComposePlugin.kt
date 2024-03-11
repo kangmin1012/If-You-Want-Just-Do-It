@@ -13,7 +13,7 @@ class ComposePlugin: Plugin<Project> {
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
             dependencies { // 의존성 library 세팅
-                add(DependencyUnitValue.IMPLEMENTATION, libs.findBundle("compose").get())
+                add(DependencyUnitValue.implementation, libs.findBundle("compose").get())
             }
         }
     }

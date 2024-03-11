@@ -27,10 +27,28 @@ class AndroidApplicationPlugin: Plugin<Project> {
                 configureApplicationDefault()
                 configureApplicationBuildType()
                 configBasicOption()
+
+                packaging {
+                    resources {
+                        excludes += "/META-INF/{AL2.0,LGPL2.1}"
+                    }
+                }
             }
 
             dependencies { // 의존성 library 세팅
-                add(DependencyUnitValue.IMPLEMENTATION, libs.findBundle("android.ktx").get())
+                val composeBom = platform(libs.findLibrary("androidx.compose.bom").get())
+
+                add(DependencyUnitValue.implementation, libs.findBundle("androidx"))
+                add(DependencyUnitValue.implementation, libs.findBundle("android.ktx").get())
+                add(DependencyUnitValue.implementation, composeBom)
+                add(DependencyUnitValue.implementation, libs.findBundle("compose").get())
+
+                add(DependencyUnitValue.testImplementation, libs.findLibrary("junit").get())
+
+                add(DependencyUnitValue.androidTestImplementation, composeBom)
+                add(DependencyUnitValue.androidTestImplementation, libs.findBundle("test").get())
+
+                add(DependencyUnitValue.debugImplementation, libs.findBundle("debug.test").get())
             }
         }
     }

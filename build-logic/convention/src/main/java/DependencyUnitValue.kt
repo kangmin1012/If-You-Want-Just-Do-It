@@ -1,3 +1,6 @@
 object DependencyUnitValue {
-    const val IMPLEMENTATION = "implementation"
+    const val implementation = "implementation"
+    const val androidTestImplementation = "androidTestImplementation"
+    const val testImplementation = "testImplementation"
+    const val debugImplementation = "debugImplementation"
 }
