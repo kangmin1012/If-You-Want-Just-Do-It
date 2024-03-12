@@ -10,7 +10,7 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 
-internal class ComposePlugin: Plugin<Project> {
+internal class ComposePlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
