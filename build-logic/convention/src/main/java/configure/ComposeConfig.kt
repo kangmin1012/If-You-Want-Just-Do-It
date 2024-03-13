@@ -1,8 +1,15 @@
 package configure
 
 import com.android.build.api.dsl.CommonExtension
+import org.gradle.api.Project
 
-internal fun CommonExtension<*, *, *, *, *, *>.configComposeOption() {
+internal fun Project.configureAndroidCompose(
+    commonExtension: CommonExtension<*, *, *, *, *, *>
+) {
+    commonExtension.configComposeOption()
+}
+
+private fun CommonExtension<*, *, *, *, *, *>.configComposeOption() {
 
     buildFeatures {
         compose = true

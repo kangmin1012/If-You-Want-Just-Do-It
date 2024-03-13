@@ -25,3 +25,5 @@ rootProject.name = "IfYouWant"
 include(":app")
 include(":core:domain")
 include(":core:data")
+include(":feature:drawer")
+include(":core:ui")

@@ -1,4 +1,4 @@
-package ifyouwant.justdo.it.ui.theme
+package ifyouwant.justdo.ui
 
 import android.app.Activity
 import android.os.Build
