@@ -23,3 +23,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "IfYouWant"
 include(":app")
+include(":core:domain")

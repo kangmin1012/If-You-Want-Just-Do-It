@@ -3,3 +3,7 @@ plugins {
     id("if.plugin.compose")
     id("if.plugin.hilt")
 }
+
+dependencies {
+    implementation(project(":core:domain"))
+}
