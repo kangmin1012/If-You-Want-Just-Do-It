@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 rootProject.name = "IfYouWant"
 include(":app")
 include(":core:domain")
+include(":core:data")

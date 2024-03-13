@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ifyouwant.domain"
+    namespace = "ifyouwant.data"
 }
 
 dependencies {
