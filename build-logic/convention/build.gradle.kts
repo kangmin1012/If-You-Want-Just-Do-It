@@ -19,6 +19,11 @@ gradlePlugin {
             implementationClass = "plugin.AndroidApplicationPlugin"
         }
 
+        register("AndroidLibraryPlugin") {
+            id = "if.plugin.library"
+            implementationClass = "plugin.AndroidLibraryPlugin"
+        }
+
         register("ComposePlugin") {
             id = "if.plugin.compose"
             implementationClass = "plugin.ComposePlugin"

@@ -1,9 +1,6 @@
 package plugin
 
-import DependencyUnitValue
-import com.android.build.api.dsl.ApplicationExtension
-import configure.application.configureApplicationBuildType
-import configure.application.configureApplicationDefault
+import com.android.build.api.dsl.LibraryExtension
 import configure.configBasicOption
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -12,47 +9,46 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 
-internal class AndroidApplicationPlugin : Plugin<Project> {
+internal class AndroidLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-
         with(target) {
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
             with(pluginManager) {
-                apply("com.android.application")
+                apply("com.android.library")
                 apply("org.jetbrains.kotlin.android")
             }
 
-            extensions.configure<ApplicationExtension> {
-                namespace = "ifyouwant.justdo.it"
-
-                configureApplicationDefault()
-                configureApplicationBuildType()
+            extensions.configure<LibraryExtension> {
                 configBasicOption()
 
-                packaging {
-                    resources {
-                        excludes += "/META-INF/{AL2.0,LGPL2.1}"
+                defaultConfig {
+                    consumerProguardFiles("consumer-rules.pro")
+                }
+
+                buildTypes {
+                    release {
+                        isMinifyEnabled = false
+                        proguardFiles(
+                            getDefaultProguardFile("proguard-android-optimize.txt"),
+                            "proguard-rules.pro"
+                        )
                     }
                 }
             }
 
-            dependencies { // 의존성 library 세팅
+            dependencies {
                 DependencyUnitValue.implementation.run {
                     (libs.findBundle("androidX").get())
                     (libs.findBundle("android.ktx").get())
                 }
 
-                DependencyUnitValue.testImplementation.run {
+                DependencyUnitValue.testImplementation.run{
                     (libs.findLibrary("junit").get())
                 }
 
                 DependencyUnitValue.androidTestImplementation.run {
                     (libs.findBundle("test").get())
-                }
-
-                DependencyUnitValue.debugImplementation.run {
-                    (libs.findBundle("debug.test").get())
                 }
             }
         }
