@@ -27,7 +27,7 @@ internal fun CommonExtension<*, *, *, *, *, *>.configBasicOption() {
     }
     
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.9.0"
     }
     
     kotlinOptions {
