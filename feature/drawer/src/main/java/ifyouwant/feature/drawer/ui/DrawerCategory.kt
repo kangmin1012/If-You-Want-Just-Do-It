@@ -23,7 +23,7 @@ import ifyouwant.justdo.ui.IfYouWantTheme
 @Composable
 fun DrawerCategoryList(
     items: List<DrawerDestination>,
-    onItemClick: (String) -> Unit = {}
+    onItemClick: (route: String) -> Unit = {_ -> }
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
