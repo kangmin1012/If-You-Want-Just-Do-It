@@ -23,5 +23,10 @@ gradlePlugin {
             id = "if.plugin.compose"
             implementationClass = "plugin.ComposePlugin"
         }
+
+        register("HiltPlugin") {
+            id = "if.plugin.hilt"
+            implementationClass = "plugin.HiltPlugin"
+        }
     }
 }

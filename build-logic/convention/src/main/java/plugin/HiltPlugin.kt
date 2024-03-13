@@ -14,7 +14,7 @@ internal class HiltPlugin : Plugin<Project> {
 
             with(pluginManager) {
                 apply("kotlin-kapt")
-                apply("com.google.dagger.hilt.android")
+                apply("dagger.hilt.android.plugin")
             }
 
             dependencies {

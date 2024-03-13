@@ -4,3 +4,9 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.jetbrainsKotlinJvm) apply false
 }
+
+buildscript {
+    dependencies {
+        classpath(libs.hiltPlugin)
+    }
+}
