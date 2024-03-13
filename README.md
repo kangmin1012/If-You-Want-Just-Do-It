@@ -19,13 +19,12 @@
 - Design Pattern : MVVM (예정)
 
 ## Feature
-### :feature:drawer
-```text
-Android의 Drawer를 Compose로 구현하고, Drawer의 탭마다 다른 화면 정보를 표시합니다.
-```
+- [feature:drawer](https://github.com/kangmin1012/If-You-Want-Just-Do-It/blob/master/docs/Feature_Drawer.md)
+
 
 ## History
-- Version Catalog + Convention Plugin 기반 프로젝트 세팅 _~ 2024.03.11_
-- Hilt 라이브러리 적용 _~ 2024.03.13_
+### 2024.03 🔥Project Start!🔥
+- Version Catalog + Convention Plugin 기반 프로젝트 세팅
+- Hilt 라이브러리 적용
+- [feature:drawer](https://github.com/kangmin1012/If-You-Want-Just-Do-It/blob/master/docs/Feature_Drawer.md) 완성
 - Multi Module 구현 (👨‍💻NOW)
-- :feature:drawer 개발 (👨‍💻NOW)
