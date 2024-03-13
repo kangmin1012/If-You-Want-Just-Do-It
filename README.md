@@ -14,11 +14,18 @@
 ## Project 구성
 - language : Kotlin
 - UI : Compose
-- DI : Hilt (예정)
+- DI : Hilt
 - Data Storage : DataStore (예정)
 - Design Pattern : MVVM (예정)
 
+## Feature
+### :feature:drawer
+```text
+Android의 Drawer를 Compose로 구현하고, Drawer의 탭마다 다른 화면 정보를 표시합니다.
+```
+
 ## History
 - Version Catalog + Convention Plugin 기반 프로젝트 세팅 _~ 2024.03.11_
-- Multi Module 구현 (진행중!)
-- Hilt 라이브러리 적용 (진행중!)
+- Hilt 라이브러리 적용 _~ 2024.03.13_
+- Multi Module 구현 (👨‍💻NOW)
+- :feature:drawer 개발 (👨‍💻NOW)
