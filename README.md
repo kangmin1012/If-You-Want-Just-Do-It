@@ -15,8 +15,8 @@
 - language : Kotlin
 - UI : Compose
 - DI : Hilt
-- Data Storage : DataStore (예정)
-- Design Pattern : MVVM (예정)
+- Data Storage : Preferences DataStore
+- Design Pattern : MVVM
 
 ## Feature
 - [feature:drawer](https://github.com/kangmin1012/If-You-Want-Just-Do-It/blob/master/docs/Feature_Drawer.md)
@@ -27,4 +27,5 @@
 - Version Catalog + Convention Plugin 기반 프로젝트 세팅
 - Hilt 라이브러리 적용
 - [feature:drawer](https://github.com/kangmin1012/If-You-Want-Just-Do-It/blob/master/docs/Feature_Drawer.md) 완성
+- Preferences DataStore 추가
 - Multi Module 구현 (👨‍💻NOW)
