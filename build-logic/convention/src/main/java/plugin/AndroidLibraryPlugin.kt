@@ -41,6 +41,7 @@ internal class AndroidLibraryPlugin : Plugin<Project> {
                 DependencyUnitValue.implementation.run {
                     (libs.findBundle("androidX").get())
                     (libs.findBundle("android.ktx").get())
+                    (libs.findLibrary("kotlin.serialization").get())
                 }
 
                 DependencyUnitValue.testImplementation.run{
