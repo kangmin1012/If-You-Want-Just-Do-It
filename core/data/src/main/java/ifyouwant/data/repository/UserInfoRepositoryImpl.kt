@@ -9,4 +9,8 @@ class UserInfoRepositoryImpl @Inject constructor(
     private val userInfoDataStore: UserInfoDataSource
 ) : UserInfoRepository {
     override fun getUserName(): Flow<String> = userInfoDataStore.getUserNameFlow()
+
+    override suspend fun saveUserName(userName: String) {
+        userInfoDataStore.saveUserName(userName)
+    }
 }

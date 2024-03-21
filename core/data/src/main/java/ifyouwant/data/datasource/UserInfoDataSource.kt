@@ -7,4 +7,8 @@ class UserInfoDataSource @Inject constructor(
     private val userInfoDataStore: UserInfoDataStore
 ) {
     fun getUserNameFlow() = userInfoDataStore.userNameFlow
+
+    suspend fun saveUserName(name: String) {
+        userInfoDataStore.saveUserName(name)
+    }
 }

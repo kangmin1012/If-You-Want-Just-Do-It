@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ifyouwant.domain.repository.UserInfoRepository
 import ifyouwant.domain.usecase.GetUserNameUseCase
+import ifyouwant.domain.usecase.SaveUserNameUseCase
 import javax.inject.Singleton
 
 @Module
@@ -15,4 +16,8 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideGetUserNameUseCase(userInfoRepository: UserInfoRepository) = GetUserNameUseCase(userInfoRepository)
+
+    @Provides
+    @Singleton
+    fun provideSaveUserNameUseCase(userInfoRepository: UserInfoRepository) = SaveUserNameUseCase(userInfoRepository)
 }

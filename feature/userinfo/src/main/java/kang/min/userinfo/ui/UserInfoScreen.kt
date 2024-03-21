@@ -10,6 +10,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -71,7 +72,9 @@ fun UserInfoScreen(
                 .fillMaxSize()
                 .padding(it),
         ) {
-            UserNameScreen(userName)
+            UserNameScreen(userName) { name ->
+                userInfoViewModel.saveUserName(name)
+            }
         }
     }
 
@@ -80,6 +83,7 @@ fun UserInfoScreen(
 @Composable
 private fun UserNameScreen(
     userName: String = "",
+    onClickSaveName: (name: String) -> Unit = {}
 ) {
 
     var textFieldUserName by remember { mutableStateOf("") }
@@ -91,11 +95,16 @@ private fun UserNameScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("당신의 이름은 무엇인가요?")
+        Text(
+            if (userName.isBlank())
+                "당신의 이름은 무엇인가요?"
+            else
+                "${userName}님 반가워요~"
+        )
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
             label = {
-                    Text(text = "이름")
+                Text(text = "이름")
             },
             value = textFieldUserName,
             onValueChange = {
@@ -111,6 +120,12 @@ private fun UserNameScreen(
                 }
             )
         )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = { onClickSaveName(textFieldUserName) }
+        ) {
+            Text(text = "이름 저장하기")
+        }
     }
 }
 

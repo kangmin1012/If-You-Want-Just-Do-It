@@ -4,4 +4,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserInfoRepository {
     fun getUserName(): Flow<String>
+
+    suspend fun saveUserName(userName: String)
 }
