@@ -22,7 +22,7 @@ internal fun Project.configureAndroidCompose(
             DependencyUnitValue.implementation(composeBom)
             DependencyUnitValue.implementation(libs.findBundle("compose").get())
             DependencyUnitValue.implementation(libs.findLibrary("compose.navigation").get())
-
+            DependencyUnitValue.debugImplementation(libs.findBundle("debug.test").get())
             DependencyUnitValue.androidTestImplementation(composeBom)
         }
     }
