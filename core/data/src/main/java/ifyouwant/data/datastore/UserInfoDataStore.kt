@@ -8,14 +8,14 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class UserNameDataStore @Inject constructor(
+class UserInfoDataStore @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
 
-    private val Context.dataStore by preferencesDataStore(name = USER_NAME_PREFERENCES)
+    private val Context.dataStore by preferencesDataStore(name = USER_INFO_PREFERENCES)
 
     companion object {
-        const val USER_NAME_PREFERENCES = "user_name_preferences"
+        const val USER_INFO_PREFERENCES = "user_info_preferences"
     }
 
     private val keyUserName = stringPreferencesKey("user_name")
