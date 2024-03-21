@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ifyouwant.feature.drawer"
+    namespace = "kang.min.userinfo"
 }
 
 dependencies {

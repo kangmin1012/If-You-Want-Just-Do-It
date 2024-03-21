@@ -21,15 +21,7 @@ internal fun CommonExtension<*, *, *, *, *, *>.configBasicOption() {
         sourceCompatibility = JavaVersion.VERSION_18
         targetCompatibility = JavaVersion.VERSION_18
     }
-    
-    buildFeatures {
-        compose = true
-    }
-    
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.9.0"
-    }
-    
+
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_18.toString()
     }

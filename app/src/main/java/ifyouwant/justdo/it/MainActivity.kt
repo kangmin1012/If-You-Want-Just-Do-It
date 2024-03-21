@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import ifyouwant.justdo.it.ui.MainScreen
 import ifyouwant.justdo.ui.IfYouWantTheme
+import kang.min.userinfo.ui.UserInfoScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +20,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             IfYouWantTheme {
                 // A surface container using the 'background' color from the theme
-                MainScreen()
+//                MainScreen()
+
+                UserInfoScreen()
             }
         }
     }
