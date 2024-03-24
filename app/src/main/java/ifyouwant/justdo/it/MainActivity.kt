@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
 import ifyouwant.justdo.it.ui.MainScreen
 import ifyouwant.justdo.ui.IfYouWantTheme
+import kang.min.userinfo.ui.GenderScreen
 import kang.min.userinfo.ui.UserInfoScreen
 
 @AndroidEntryPoint
@@ -24,7 +25,8 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
 //                MainScreen()
 
-                UserInfoScreen()
+//                UserInfoScreen()
+                GenderScreen()
             }
         }
     }
