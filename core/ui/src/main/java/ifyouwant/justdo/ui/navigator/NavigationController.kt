@@ -1,8 +1,8 @@
-package ifyouwant.feature.drawer.navigation
+package ifyouwant.justdo.ui.navigator
 
 import androidx.navigation.NavHostController
 
-internal fun NavHostController.navigateSingleTopTo(rout: String) {
+fun NavHostController.navigateSingleTopTo(rout: String) {
     this.navigate(rout) {
         launchSingleTop = true // 백 스택에 대상이 최대 1개만 존재하도록 설정
         popUpTo(

@@ -40,7 +40,9 @@ import ifyouwant.justdo.ui.util.keyboardAsState
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserInfoScreen(
-    userInfoViewModel: UserInfoViewModel = hiltViewModel()
+    userInfoViewModel: UserInfoViewModel = hiltViewModel(),
+    onClickSaveName: () -> Unit = {},
+    onClickBack:() -> Unit = {}
 ) {
     val focusManager = LocalFocusManager.current
     val userName by userInfoViewModel.userNameState.collectAsState()
@@ -55,7 +57,7 @@ fun UserInfoScreen(
             TopAppBar(
                 navigationIcon = {
                     IconButton(
-                        onClick = { }
+                        onClick = onClickBack
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -74,6 +76,7 @@ fun UserInfoScreen(
         ) {
             UserNameScreen(userName) { name ->
                 userInfoViewModel.saveUserName(name)
+                onClickSaveName()
             }
         }
     }
