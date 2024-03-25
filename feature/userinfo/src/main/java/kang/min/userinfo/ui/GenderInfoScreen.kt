@@ -87,7 +87,8 @@ private fun GenderScreenContainer() {
             onClick = {
 
             },
-            contentPadding = PaddingValues(18.dp)
+            contentPadding = PaddingValues(18.dp),
+            enabled = state != EnumGender.NONE
         ) {
             Text(text = "결정", style = MaterialTheme.typography.bodyLarge)
         }
