@@ -3,6 +3,7 @@ package ifyouwant.data.datastore
 import android.content.Context
 import android.util.Log
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -31,5 +32,11 @@ class UserInfoDataStore @Inject constructor(
         }
     }
 
+    private val keyUserGender = intPreferencesKey("user_gender")
 
+    suspend fun saveUserGender(state: Int) {
+        context.dataStore.edit { preference ->
+            preference[keyUserGender] = state
+        }
+    }
 }

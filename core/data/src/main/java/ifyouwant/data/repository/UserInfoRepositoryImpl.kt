@@ -13,4 +13,8 @@ class UserInfoRepositoryImpl @Inject constructor(
     override suspend fun saveUserName(userName: String) {
         userInfoDataStore.saveUserName(userName)
     }
+
+    override suspend fun saveUserGender(state: Int) {
+        userInfoDataStore.saveUserGender(state)
+    }
 }

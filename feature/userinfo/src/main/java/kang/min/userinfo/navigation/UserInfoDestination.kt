@@ -2,6 +2,7 @@ package kang.min.userinfo.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
@@ -15,33 +16,46 @@ interface UserInfoDestination {
     val route: String
 }
 
-object UserInfoRoute: UserInfoDestination {
+object UserInfoRoute : UserInfoDestination {
     override val route: String
         get() = "user_info"
 }
 
-internal object UserName: UserInfoDestination {
+internal object UserName : UserInfoDestination {
     override val route: String
         get() = "user_name"
 }
 
-internal object GenderInfo: UserInfoDestination {
+internal object GenderInfo : UserInfoDestination {
     override val route: String
         get() = "gender_info"
 }
 
-fun NavGraphBuilder.nestedUserInfoGraph(navController: NavController) {
+fun NavGraphBuilder.nestedUserInfoGraph(
+    navController: NavController,
+    onFinishUserInfoSetting: () -> Unit
+) {
     navigation(startDestination = UserName.route, route = UserInfoRoute.route) {
 
         composable(UserName.route) {
             UserInfoScreen(
-                onClickSaveName = { navController.navigate(GenderInfo.route) },
+                onClickSaveName = {
+                    navController.navigate(GenderInfo.route) {
+                        popUpTo(UserName.route) {
+                            saveState = true
+                        }
+
+                        restoreState = true
+                    }
+                },
                 onClickBack = { navController.popBackStack() }
             )
         }
 
         composable(GenderInfo.route) {
-            GenderScreen()
+            GenderScreen {
+                onFinishUserInfoSetting()
+            }
         }
     }
 }

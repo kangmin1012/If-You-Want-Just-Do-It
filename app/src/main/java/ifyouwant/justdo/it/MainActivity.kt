@@ -38,7 +38,15 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
-                        nestedUserInfoGraph(navController)
+                        nestedUserInfoGraph(
+                            navController = navController,
+                            onFinishUserInfoSetting = {
+                                navController.navigate(MainRoute.route) {
+                                    launchSingleTop = true
+                                    popUpTo(MainRoute.route) { inclusive = true }
+                                }
+                            }
+                        )
                     }
                 }
             }

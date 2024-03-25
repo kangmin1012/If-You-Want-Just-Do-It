@@ -26,28 +26,41 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import ifyouwant.justdo.ui.IfYouWantTheme
-import kang.min.userinfo.ui.enumset.EnumGender
+import ifyouwant.domain.enumset.EnumGender
 
 @Composable
-fun GenderScreen() {
+fun GenderScreen(
+    userInfoViewModel: UserInfoViewModel = hiltViewModel(),
+    onSuccessSaveGender: () -> Unit = {}
+) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        GenderScreenContainer()
+        GenderScreenContainer { gender ->
+            userInfoViewModel.saveUserGender(gender)
+            onSuccessSaveGender()
+        }
     }
 }
 
 @Composable
-private fun GenderScreenContainer() {
+private fun GenderScreenContainer(
+    onClickSelectGender: (gender: EnumGender) -> Unit = {}
+) {
     var state by remember { mutableStateOf(EnumGender.NONE) }
 
     Box(
-        modifier = Modifier.fillMaxSize().padding(top = 100.dp, bottom = 32.dp)
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 100.dp, bottom = 32.dp)
     ) {
 
         Column(
-            modifier = Modifier.align(Alignment.TopCenter).padding(horizontal = 16.dp)
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(horizontal = 16.dp)
         ) {
             Text(
                 modifier = Modifier
@@ -85,7 +98,7 @@ private fun GenderScreenContainer() {
                 .padding(horizontal = 16.dp)
                 .align(Alignment.BottomCenter),
             onClick = {
-
+                onClickSelectGender(state)
             },
             contentPadding = PaddingValues(18.dp),
             enabled = state != EnumGender.NONE
@@ -145,7 +158,7 @@ private fun GenderRadioButton(
 @Composable
 fun GenderScreenPreview() {
     IfYouWantTheme {
-        GenderScreen()
+        GenderScreenContainer()
     }
 }
 

@@ -1,4 +1,4 @@
-package kang.min.userinfo.ui.enumset
+package ifyouwant.domain.enumset
 
 enum class EnumGender {
     NONE,
