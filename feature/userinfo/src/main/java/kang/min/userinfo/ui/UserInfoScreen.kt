@@ -1,6 +1,5 @@
 package kang.min.userinfo.ui
 
-import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -15,12 +14,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ifyouwant.justdo.ui.util.Keyboard
 import ifyouwant.justdo.ui.util.keyboardAsState
+import kang.min.userinfo.navigation.BirthDayInfo
 import kang.min.userinfo.navigation.GenderInfo
 import kang.min.userinfo.navigation.UserName
 
@@ -66,7 +65,7 @@ fun UserInfoScreen(
 
         NavHost(
             navController = navController,
-            startDestination = UserName.route,
+            startDestination = BirthDayInfo.route,
             modifier = Modifier.padding(it)
         ) {
 
@@ -94,6 +93,10 @@ fun UserInfoScreen(
                         onClickFinish()
                     }
                 )
+            }
+
+            composable(BirthDayInfo.route) {
+                BirthdayInfoScreen()
             }
         }
     }

@@ -30,3 +30,8 @@ internal object GenderInfo : UserInfoDestination {
     override val route: String
         get() = "gender_info"
 }
+
+internal object BirthDayInfo : UserInfoDestination {
+    override val route: String
+        get() = "birthday_info"
+}
