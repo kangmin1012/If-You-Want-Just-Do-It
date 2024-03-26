@@ -31,7 +31,7 @@ import ifyouwant.justdo.ui.IfYouWantTheme
 import ifyouwant.domain.enumset.EnumGender
 
 @Composable
-fun GenderScreen(
+internal fun GenderScreen(
     userInfoViewModel: UserInfoViewModel = hiltViewModel(),
     onSuccessSaveGender: () -> Unit = {}
 ) {

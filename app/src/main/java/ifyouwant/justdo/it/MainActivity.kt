@@ -14,10 +14,11 @@ import ifyouwant.justdo.it.navigation.MainRoute
 import ifyouwant.justdo.it.ui.MainScreen
 import ifyouwant.justdo.ui.IfYouWantTheme
 import kang.min.userinfo.navigation.UserInfoRoute
-import kang.min.userinfo.navigation.nestedUserInfoGraph
+import kang.min.userinfo.ui.UserInfoScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -38,15 +39,18 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
-                        nestedUserInfoGraph(
-                            navController = navController,
-                            onFinishUserInfoSetting = {
-                                navController.navigate(MainRoute.route) {
-                                    launchSingleTop = true
-                                    popUpTo(MainRoute.route) { inclusive = true }
-                                }
-                            }
-                        )
+
+                        composable(UserInfoRoute.route) {
+                            UserInfoScreen(
+                                onClickFinish = {
+                                    navController.navigate(MainRoute.route) {
+                                        launchSingleTop = true
+                                        popUpTo(MainRoute.route) { inclusive = true }
+                                    }
+                                },
+                                onClickClose = { navController.popBackStack() }
+                            )
+                        }
                     }
                 }
             }

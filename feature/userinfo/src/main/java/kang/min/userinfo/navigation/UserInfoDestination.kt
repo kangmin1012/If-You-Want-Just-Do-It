@@ -30,32 +30,3 @@ internal object GenderInfo : UserInfoDestination {
     override val route: String
         get() = "gender_info"
 }
-
-fun NavGraphBuilder.nestedUserInfoGraph(
-    navController: NavController,
-    onFinishUserInfoSetting: () -> Unit
-) {
-    navigation(startDestination = UserName.route, route = UserInfoRoute.route) {
-
-        composable(UserName.route) {
-            UserInfoScreen(
-                onClickSaveName = {
-                    navController.navigate(GenderInfo.route) {
-                        popUpTo(UserName.route) {
-                            saveState = true
-                        }
-
-                        restoreState = true
-                    }
-                },
-                onClickBack = { navController.popBackStack() }
-            )
-        }
-
-        composable(GenderInfo.route) {
-            GenderScreen {
-                onFinishUserInfoSetting()
-            }
-        }
-    }
-}

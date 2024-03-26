@@ -1,49 +1,37 @@
 package kang.min.userinfo.ui
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import android.util.Log
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import ifyouwant.justdo.ui.IfYouWantTheme
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import ifyouwant.justdo.ui.util.Keyboard
 import ifyouwant.justdo.ui.util.keyboardAsState
+import kang.min.userinfo.navigation.GenderInfo
+import kang.min.userinfo.navigation.UserName
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserInfoScreen(
     userInfoViewModel: UserInfoViewModel = hiltViewModel(),
-    onClickSaveName: () -> Unit = {},
-    onClickBack:() -> Unit = {}
+    onClickFinish: () -> Unit = {},
+    onClickClose: () -> Unit = {}
 ) {
+    val navController = rememberNavController()
     val focusManager = LocalFocusManager.current
     val userName by userInfoViewModel.userNameState.collectAsState()
     val keyboardState by keyboardAsState()
@@ -57,7 +45,13 @@ fun UserInfoScreen(
             TopAppBar(
                 navigationIcon = {
                     IconButton(
-                        onClick = onClickBack
+                        onClick = {
+                            if (navController.currentDestination?.route == UserName.route) {
+                                onClickClose()
+                            } else {
+                                navController.popBackStack()
+                            }
+                        }
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -69,74 +63,35 @@ fun UserInfoScreen(
             )
         }
     ) {
-        Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it),
+
+        NavHost(
+            navController = navController,
+            startDestination = UserName.route,
+            modifier = Modifier.padding(it)
         ) {
-            UserNameScreen(userName) { name ->
-                userInfoViewModel.saveUserName(name)
-                onClickSaveName()
+
+            composable(UserName.route) {
+                UserNameScreen(
+                    userName = userName,
+                    onClickSaveName = { userName ->
+                        userInfoViewModel.saveUserName(userName = userName)
+
+                        navController.navigate(GenderInfo.route) {
+                            popUpTo(UserName.route) {
+                                saveState = true
+                            }
+
+                            restoreState = true
+                        }
+                    }
+                )
+            }
+
+            composable(GenderInfo.route) {
+                GenderScreen(
+                    onSuccessSaveGender = onClickFinish
+                )
             }
         }
-    }
-
-}
-
-@Composable
-private fun UserNameScreen(
-    userName: String = "",
-    onClickSaveName: (name: String) -> Unit = {}
-) {
-
-    var textFieldUserName by remember { mutableStateOf("") }
-    val keyboardController = LocalSoftwareKeyboardController.current
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            if (userName.isBlank())
-                "당신의 이름은 무엇인가요?"
-            else
-                "${userName}님 반가워요~"
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField(
-            label = {
-                Text(text = "이름")
-            },
-            value = textFieldUserName,
-            onValueChange = {
-                textFieldUserName = it
-            },
-            singleLine = true,
-            keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    keyboardController?.hide()
-                }
-            )
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Button(
-            onClick = { onClickSaveName(textFieldUserName) }
-        ) {
-            Text(text = "이름 저장하기")
-        }
-    }
-}
-
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun UserNameScreenPreview() {
-    IfYouWantTheme {
-        UserNameScreen("홍길동")
     }
 }
