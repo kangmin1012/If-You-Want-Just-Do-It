@@ -89,7 +89,10 @@ fun UserInfoScreen(
 
             composable(GenderInfo.route) {
                 GenderScreen(
-                    onSuccessSaveGender = onClickFinish
+                    onSuccessSaveGender = { gender ->
+                        userInfoViewModel.saveUserGender(gender)
+                        onClickFinish()
+                    }
                 )
             }
         }

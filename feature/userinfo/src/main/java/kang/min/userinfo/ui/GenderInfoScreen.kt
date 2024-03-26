@@ -32,81 +32,70 @@ import ifyouwant.domain.enumset.EnumGender
 
 @Composable
 internal fun GenderScreen(
-    userInfoViewModel: UserInfoViewModel = hiltViewModel(),
-    onSuccessSaveGender: () -> Unit = {}
+    onSuccessSaveGender: (gender: EnumGender) -> Unit = {}
 ) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        GenderScreenContainer { gender ->
-            userInfoViewModel.saveUserGender(gender)
-            onSuccessSaveGender()
-        }
-    }
-}
 
-@Composable
-private fun GenderScreenContainer(
-    onClickSelectGender: (gender: EnumGender) -> Unit = {}
-) {
-    var state by remember { mutableStateOf(EnumGender.NONE) }
+        var state by remember { mutableStateOf(EnumGender.NONE) }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 100.dp, bottom = 32.dp)
-    ) {
-
-        Column(
+        Box(
             modifier = Modifier
-                .align(Alignment.TopCenter)
-                .padding(horizontal = 16.dp)
+                .fillMaxSize()
+                .padding(top = 100.dp, bottom = 32.dp)
         ) {
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                text = "성별을 선택해주세요",
-                style = MaterialTheme.typography.headlineMedium
-            )
 
-            Row(
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 64.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    .align(Alignment.TopCenter)
+                    .padding(horizontal = 16.dp)
             ) {
-                GenderRadioButton(
-                    modifier = Modifier.weight(1f, true),
-                    isSelected = state == EnumGender.MAN,
-                    genderString = "남자"
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    text = "성별을 선택해주세요",
+                    style = MaterialTheme.typography.headlineMedium
+                )
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 64.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    state = EnumGender.MAN
-                }
-                GenderRadioButton(
-                    modifier = Modifier.weight(1f, true),
-                    isSelected = state == EnumGender.WOMAN,
-                    genderString = "여자"
-                ) {
-                    state = EnumGender.WOMAN
+                    GenderRadioButton(
+                        modifier = Modifier.weight(1f, true),
+                        isSelected = state == EnumGender.MAN,
+                        genderString = "남자"
+                    ) {
+                        state = EnumGender.MAN
+                    }
+                    GenderRadioButton(
+                        modifier = Modifier.weight(1f, true),
+                        isSelected = state == EnumGender.WOMAN,
+                        genderString = "여자"
+                    ) {
+                        state = EnumGender.WOMAN
+                    }
                 }
             }
-        }
 
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .align(Alignment.BottomCenter),
-            onClick = {
-                onClickSelectGender(state)
-            },
-            contentPadding = PaddingValues(18.dp),
-            enabled = state != EnumGender.NONE
-        ) {
-            Text(text = "결정", style = MaterialTheme.typography.bodyLarge)
+            Button(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+                    .align(Alignment.BottomCenter),
+                onClick = {
+                    onSuccessSaveGender(state)
+                },
+                contentPadding = PaddingValues(18.dp),
+                enabled = state != EnumGender.NONE
+            ) {
+                Text(text = "결정", style = MaterialTheme.typography.bodyLarge)
+            }
         }
     }
-
 }
 
 @Composable
@@ -158,7 +147,7 @@ private fun GenderRadioButton(
 @Composable
 fun GenderScreenPreview() {
     IfYouWantTheme {
-        GenderScreenContainer()
+        GenderScreen()
     }
 }
 
