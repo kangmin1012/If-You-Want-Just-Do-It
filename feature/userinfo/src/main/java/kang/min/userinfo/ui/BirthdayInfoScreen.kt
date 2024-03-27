@@ -1,5 +1,6 @@
 package kang.min.userinfo.ui
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
@@ -13,7 +14,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -40,6 +46,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
@@ -55,26 +62,28 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BirthdayInfoScreen() {
-
     val coroutineScope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+
         Image(
-            modifier = Modifier
-                .align(Alignment.TopCenter)
-                .padding(top = 100.dp),
+            modifier = Modifier,
             painter = painterResource(id = R.drawable.img_birthday_cake),
             contentDescription = "생일 타이틀 이미지"
         )
 
         Column(
-            modifier = Modifier.align(Alignment.Center),
+            modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-
             Spacer(modifier = Modifier.height(60.dp))
             Text(text = "생년월일을 선택해주세요", style = MaterialTheme.typography.headlineSmall)
             Spacer(modifier = Modifier.height(32.dp))
@@ -92,6 +101,15 @@ fun BirthdayInfoScreen() {
                 onDismissRequest = { showBottomSheet = false },
                 sheetState = sheetState
             ) {
+
+                NumberPickerSpinner(
+                    modifier = Modifier.fillMaxWidth(),
+                    items = (1..10).map { it.toString() },
+                    startIndex = 3
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
                 Button(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -111,6 +129,7 @@ fun BirthdayInfoScreen() {
         }
     }
 
+
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -121,16 +140,21 @@ fun NumberPickerSpinner(
     startIndex: Int = 0,
     visibleItemsCount: Int = 3,
 ) {
+    val spacedItems = items.map { it }.toMutableList().apply {
+        add(0, "")
+        add("")
+    }
+
+    val localDensity = LocalDensity.current
+
     var selectedItem by remember { mutableStateOf("") }
     val visibleItemsMiddle = visibleItemsCount / 2
-    val listScrollCount = Integer.MAX_VALUE
-    val listScrollMiddle = listScrollCount / 2
-    val listStartIndex = listScrollMiddle - listScrollMiddle % items.size - visibleItemsMiddle + startIndex
 
-    val listState = rememberLazyListState(initialFirstVisibleItemIndex = listStartIndex)
+    val listState = rememberLazyListState(initialFirstVisibleItemIndex = startIndex)
     val flingBehavior = rememberSnapFlingBehavior(lazyListState = listState)
 
     var itemHeight by remember { mutableIntStateOf(0) }
+    val itemHeightDp = with(localDensity) { itemHeight.toDp() }
 
     val fadingEdgeGradient = remember {
         Brush.verticalGradient(
@@ -149,7 +173,9 @@ fun NumberPickerSpinner(
             .collect { item -> selectedItem = item }
     }
 
-    Box(modifier = modifier) {
+    Box(
+        modifier = modifier
+    ) {
 
         LazyColumn(
             state = listState,
@@ -157,37 +183,41 @@ fun NumberPickerSpinner(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(itemHeight.dp * visibleItemsCount)
+                .height(itemHeightDp * visibleItemsCount)
                 .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
                 .drawWithContent {
                     drawContent()
                     drawRect(brush = fadingEdgeGradient, blendMode = BlendMode.DstIn)
                 }
         ) {
-            items(listScrollCount) { index ->
+            items(spacedItems) { item ->
                 Text(
-                    text = items[(index) % items.size],
+                    text = item,
                     style = TextStyle(
-                        color = Color.White,
+                        color = Color.Black,
                         fontSize = 32.sp
                     ),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier
-                        .onSizeChanged { size -> itemHeight = size.height }
+                        .onSizeChanged { size ->
+                            itemHeight = size.height
+                        }
                         .padding(8.dp)
                 )
             }
         }
 
         HorizontalDivider(
-            modifier = Modifier.offset(y = itemHeight.dp * visibleItemsMiddle),
-            color = Color.White
+            modifier = Modifier.offset(y = itemHeightDp * visibleItemsMiddle),
+            color = MaterialTheme.colorScheme.primary,
+            thickness = 2.dp
         )
 
         HorizontalDivider(
-            color =  Color.White,
-            modifier = Modifier.offset(y = itemHeight.dp * (visibleItemsMiddle + 1))
+            modifier = Modifier.offset(y = itemHeightDp * (visibleItemsMiddle + 1)),
+            color = MaterialTheme.colorScheme.primary,
+            thickness = 2.dp
         )
 
     }
@@ -195,7 +225,7 @@ fun NumberPickerSpinner(
 }
 
 @Composable
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 private fun BirthdayInfoScreenPreview() {
     IfYouWantTheme {
         BirthdayInfoScreen()
@@ -203,11 +233,12 @@ private fun BirthdayInfoScreenPreview() {
 }
 
 @Composable
-@Preview
+@Preview(showBackground = true)
 private fun NumberPickerSpinnerPreview() {
     IfYouWantTheme {
         NumberPickerSpinner(
-            items = (1..99).map {it.toString()},
+            items = (1..99).map { it.toString() },
+            modifier = Modifier.wrapContentSize()
         )
     }
 }
