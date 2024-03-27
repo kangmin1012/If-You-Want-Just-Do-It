@@ -32,7 +32,7 @@ import ifyouwant.feature.drawer.navigation.About
 import ifyouwant.feature.drawer.navigation.Articles
 import ifyouwant.feature.drawer.navigation.Settings
 import ifyouwant.feature.drawer.navigation.categoryTabs
-import ifyouwant.justdo.ui.IfYouWantTheme
+import kang.min.designsystem.IfYouWantTheme
 import ifyouwant.justdo.ui.navigator.navigateSingleTopTo
 import kotlinx.coroutines.launch
 

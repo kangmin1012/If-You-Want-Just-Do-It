@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import ifyouwant.justdo.ui.IfYouWantTheme
+import kang.min.designsystem.IfYouWantTheme
 
 @Composable
 internal fun ArticlesScreen() {

@@ -1,4 +1,4 @@
-package ifyouwant.justdo.ui
+package kang.min.designsystem
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

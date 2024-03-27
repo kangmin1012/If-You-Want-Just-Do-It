@@ -12,7 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import ifyouwant.justdo.it.navigation.MainRoute
 import ifyouwant.justdo.it.ui.MainScreen
-import ifyouwant.justdo.ui.IfYouWantTheme
+import kang.min.designsystem.IfYouWantTheme
 import kang.min.userinfo.navigation.UserInfoRoute
 import kang.min.userinfo.ui.UserInfoScreen
 

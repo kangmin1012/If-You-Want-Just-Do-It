@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ifyouwant.feature.drawer.navigation.DrawerDestination
 import ifyouwant.feature.drawer.navigation.categoryTabs
-import ifyouwant.justdo.ui.IfYouWantTheme
+import kang.min.designsystem.IfYouWantTheme
 
 @Composable
 fun DrawerCategoryList(

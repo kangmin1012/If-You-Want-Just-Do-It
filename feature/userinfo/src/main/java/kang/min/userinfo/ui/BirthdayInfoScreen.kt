@@ -26,7 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ifyouwant.justdo.ui.IfYouWantTheme
+import kang.min.designsystem.IfYouWantTheme
 import ifyouwant.justdo.ui.NumberPickerSpinner
 import kang.min.userinfo.R
 import kotlinx.coroutines.launch
