@@ -18,6 +18,9 @@
 - Data Storage : Preferences DataStore
 - Design Pattern : MVVM
 
+## 모듈 구성
+[모듈화 문서]((https://github.com/kangmin1012/If-You-Want-Just-Do-It/blob/master/docs/ModularizationJourney.md))에서 자세하게 확인할 수 있습니다.
+
 ## Feature
 - [feature:drawer](https://github.com/kangmin1012/If-You-Want-Just-Do-It/blob/master/docs/Feature_Drawer.md)
 
@@ -28,4 +31,5 @@
 - Hilt 라이브러리 적용
 - [feature:drawer](https://github.com/kangmin1012/If-You-Want-Just-Do-It/blob/master/docs/Feature_Drawer.md) 완성
 - Preferences DataStore 추가
-- Multi Module 구현 (👨‍💻NOW)
+- Multi Module 구현
+- feature:userinfo 기능 구현 진행
