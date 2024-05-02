@@ -34,6 +34,11 @@ gradlePlugin {
             implementationClass = "plugin.AndroidLibraryComposePlugin"
         }
 
+        register("AndroidFeaturePlugin") {
+            id = "if.plugin.feature"
+            implementationClass = "plugin.AndroidFeaturePlugin"
+        }
+
         register("HiltPlugin") {
             id = "if.plugin.hilt"
             implementationClass = "plugin.HiltPlugin"
