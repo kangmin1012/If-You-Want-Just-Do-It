@@ -8,9 +8,9 @@ fun NavHostController.navigateSingleTopTo(rout: String) {
         popUpTo(
             this@navigateSingleTopTo.graph.startDestinationId // 백스택을 맨 처음 대상까지 popUp
         ) {
-            saveState = true
+            saveState = true // popup 하는 대상의 상태를 저장하고 있을 것인지 여부
         }
 
-        restoreState = true // 대상의 이전 상태를 저장 할건지 여부
+        restoreState = true // 대상의 이전 상태를 다시 불러 들일건지 여부
     }
 }

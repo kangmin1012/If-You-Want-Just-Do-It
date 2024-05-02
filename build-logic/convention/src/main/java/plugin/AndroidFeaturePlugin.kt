@@ -41,10 +41,10 @@ internal class AndroidFeaturePlugin : Plugin<Project> {
             }
 
             dependencies {
-                DependencyUnitValue.implementation.run {
-                    (project(":core:ui"))
-                    (project(":core:designsystem"))
-                    (project(":core:domain"))
+                with(DependencyUnitValue) {
+                    implementation((project(":core:ui")))
+                    implementation((project(":core:designsystem")))
+                    implementation((project(":core:domain")))
                 }
             }
         }
